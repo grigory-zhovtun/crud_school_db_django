@@ -75,10 +75,6 @@ def fix_chastisement(schoolkid):
     chastisement_kid.delete()
 
 
-def get_random_commendation() -> str:
-    return random.choice(COMMENDATIONS)
-
-
 def create_commendation(name, subject_title):
     kid = get_current_student(name)
     subject = Subject.objects.get(
@@ -91,7 +87,7 @@ def create_commendation(name, subject_title):
         subject=subject
     ).order_by('-date').first())
     Commendation.objects.create(
-        text=get_random_commendation(),
+        text=random.choice(COMMENDATIONS),
         created=lesson.date,
         schoolkid=kid,
         subject=subject,
