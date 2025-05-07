@@ -68,9 +68,7 @@ def fix_marks(schoolkid):
 
 
 def fix_chastisement(schoolkid):
-    kid = Schoolkid.objects.get(
-        full_name__contains=schoolkid
-    )
+    kid = get_current_student(schoolkid)
     chastisement_kid = Chastisement.objects.filter(
         schoolkid=kid
     )
@@ -82,9 +80,7 @@ def get_random_commendation() -> str:
 
 
 def create_commendation(name, subject_title):
-    kid = Schoolkid.objects.get(
-        full_name__contains=name
-    )
+    kid = get_current_student(name)
     subject = Subject.objects.get(
         title__iexact=subject_title,
         year_of_study=kid.year_of_study
