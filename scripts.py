@@ -86,6 +86,11 @@ def create_commendation(name, subject_title):
         group_letter=kid.group_letter,
         subject=subject
     ).order_by('-date').first())
+
+    if not lesson:
+        print('Подходящий урок не найден — похвала не создана.')
+        return
+
     Commendation.objects.create(
         text=random.choice(COMMENDATIONS),
         created=lesson.date,
@@ -93,3 +98,4 @@ def create_commendation(name, subject_title):
         subject=subject,
         teacher=lesson.teacher
     )
+    print('Похвала успешно создана!')
