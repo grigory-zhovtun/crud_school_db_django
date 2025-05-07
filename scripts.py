@@ -61,13 +61,10 @@ def get_current_student(student_full_name):
 
 
 def fix_marks(schoolkid):
-    bed_marks = Mark.objects.filter(
-        schoolkid=schoolkid,
-        points__lte=UNACCEPTABLE_GRADE
-    )
-    for mark_to_modify in bed_marks:
-        mark_to_modify.points = BEST_MARK
-        mark_to_modify.save()
+    updated = (Mark.objects
+               .filter(schoolkid=schoolkid, points__lte=UNACCEPTABLE_GRADE)
+               .update(points=BEST_MARK))
+    print(f'Исправлено оценок: {updated}')
 
 
 def fix_chastisement(schoolkid):
